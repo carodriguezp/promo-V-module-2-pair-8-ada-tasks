@@ -9,10 +9,10 @@ const searchForm = document.querySelector(".js-search-form");
 const inputSearch = document.querySelector(".js-input-search");
 const buttonSearch = document.querySelector(".js-button-search");
 const taskList = document.querySelector(".js-list");
-
+const checkbox = document.querySelector('.js-checkbox');
+const listInput = document.querySelector('.js-listInput');
 ///
 
-taskList.innerHTML = `<li class="completed">Recoger setas en el campo</li>`;
 
 ///para el boton agregar
 
@@ -27,4 +27,19 @@ const tasks = [
     },
 ];
 
+for (let i = 0; i < tasks.length; i++) {
+    taskList.innerHTML += `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`
+    // if (taskList.innerHTML === `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}" checked>${tasks[i].name}</li>`) {
+    //     listInput.classList.add('completed');
+    // } else if (taskList.innerHTML === `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`) {
+    //     listInput.classList.remove('completed');
+    // }
+    
+}
+
+function handleCheck() {
+    
+}
+
+checkbox.addEventListener('click', handleCheck);
 //para el botón buscar

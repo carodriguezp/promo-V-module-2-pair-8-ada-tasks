@@ -1,3 +1,6 @@
 .completed {
     text-decoration-line: line-through;
 }
+li {
+    list-style: none;
+}
