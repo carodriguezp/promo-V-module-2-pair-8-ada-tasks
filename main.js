@@ -9,7 +9,7 @@ const searchForm = document.querySelector(".js-search-form");
 const inputSearch = document.querySelector(".js-input-search");
 const buttonSearch = document.querySelector(".js-button-search");
 const taskList = document.querySelector(".js-list");
-const checkbox = document.querySelector('.js-checkbox');
+const checkbox = document.querySelectorAll('.js-checkbox');
 const listInput = document.querySelector('.js-listInput');
 ///
 
@@ -28,18 +28,51 @@ const tasks = [
 ];
 
 for (let i = 0; i < tasks.length; i++) {
-    taskList.innerHTML += `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`
-    // if (taskList.innerHTML === `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}" checked>${tasks[i].name}</li>`) {
-    //     listInput.classList.add('completed');
-    // } else if (taskList.innerHTML === `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`) {
-    //     listInput.classList.remove('completed');
-    // }
-    
+
+    if (tasks[i].completed) {
+        taskList.innerHTML += `<li class="js-listInput completed"><input class="js-checkbox" type="checkbox" id="${[i]}" checked >${tasks[i].name}</li>`
+
+    } else {
+        taskList.innerHTML += `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`
+
+    }
+
+}
+
+function addNewTask() {
+    for (let i = 0; i < tasks.length; i++) {
+
+        if (tasks[i].completed) {
+            taskList.innerHTML += `<li class="js-listInput completed"><input class="js-checkbox" type="checkbox" id="${[i]}" checked >${tasks[i].name}</li>`
+
+        } else {
+            taskList.innerHTML += `<li class="js-listInput"><input class="js-checkbox" type="checkbox" id="${[i]}">${tasks[i].name}</li>`
+
+        }
+
+    }
 }
 
 function handleCheck() {
-    
+
+    // TENEMOS QUE MODIFICAR ELA ARRAY TASKA Para cambiar la propiedad COMPLETED para cambiarlo segun el estado del checkbox
+    //TENEMOS QUE VOLVER A PINTAR LA LISTA DE TAREAS
+    //NO TIENE QUE TENER UN FOR ESTA FUNCIÓN
+
+    addNewTask()
 }
 
-checkbox.addEventListener('click', handleCheck);
-//para el botón buscar
+
+
+//hacer bucle para cada elemento del array de los checkbox
+for (const box of checkbox) {
+    box.addEventListener('change', handleCheck);
+
+}
+
+
+
+
+
+//no se puede hacer un listener sobre un array
+//checkbox.addEventListener('change', handleCheck); NO SE PUEDE HACEEEEEEEEER
