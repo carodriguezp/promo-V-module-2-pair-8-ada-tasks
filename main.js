@@ -9,7 +9,6 @@ const searchForm = document.querySelector('.js-search-form');
 const inputSearch = document.querySelector('.js-input-search');
 const buttonSearch = document.querySelector('.js-button-search');
 const taskList = document.querySelector('.js-list');
-const checkbox = document.querySelectorAll('.js-checkbox');
 const listInput = document.querySelector('.js-listInput');
 ///
 
@@ -22,7 +21,18 @@ const tasks = [
 		completed: false,
 	},
 ];
+
+//BOTÓN DE BUSCAR
+function handleSearch(event) {
+	event.preventDefault();
+	const valueInput = inputSearch.value;
+	const arraySearch = tasks.filter((task) => task.name.includes(valueInput));
+	renderTask(arraySearch);
+}
+buttonSearch.addEventListener('click', handleSearch);
+
 const listenCheck = () => {
+	const checkbox = document.querySelectorAll('.js-checkbox');
 	//hacer bucle para cada elemento del array de los checkbox.
 	for (const box of checkbox) {
 		box.addEventListener('change', handleCheck);
@@ -64,12 +74,3 @@ renderTask(tasks);
 
 //no se puede hacer un listener sobre un array
 //checkbox.addEventListener('change', handleCheck);
-
-//BOTÓN DE BUSCAR
-function handleSearch(event) {
-	event.preventDefault();
-	const valueInput = inputSearch.value;
-	const arraySearch = tasks.filter((task) => task.name.includes(valueInput));
-	renderTask(arraySearch);
-}
-buttonSearch.addEventListener('click', handleSearch);
