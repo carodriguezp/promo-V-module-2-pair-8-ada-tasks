@@ -95,7 +95,6 @@ renderTask(tasks);
 //checkbox.addEventListener('change', handleCheck);
 
 
-
 ///2.13 PETICIONES AL SERVIDOR:
 
 const GITHUB_USER = 'carodriguezp';
