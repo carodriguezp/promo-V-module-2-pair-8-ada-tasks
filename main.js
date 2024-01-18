@@ -100,15 +100,21 @@ const GITHUB_USER = 'carodriguezp';
 const SERVER_URL = `https://dev.adalab.es/api/todo`;
 
 //2.14 Peticiones al servidor 2
+let counter = 6;
 function handleNewTask(event) {
+
     event.preventDefault();
+
+    counter++;
     const newTaskDataObject = {
-        id: 0,
+        id: counter,
         name: `${inputAdd.value}`,
         completed: false,
     };
+
     tasks.push(newTaskDataObject);
-    localStorage.setItem('task', JSON.stringify(newTaskDataObject));
+    localStorage.setItem('task', JSON.stringify(tasks)); //task es el array de todas
+
     renderTask(tasks);
     inputAdd.value = '';
 
@@ -140,12 +146,15 @@ buttonAdd.addEventListener('click', handleNewTask);
 
 //Nos pilla solo la última tarea que hemos metido, no las demás que vienen del servidor.
 const tasksLS = JSON.parse(localStorage.getItem('task'));
-console.log(tasksLS);
-// function getLocalDatal() {
-// 	if (tasksLS) {
-// 		taskList.innerHTML = ``;
-// 	}
-// }
+console.log(tasksLS, 'hola');
+function getLocalData(tasksLS) {
+    if (tasksLS) {
+        taskList.innerHTML = ``;
+    }
+    renderTask(tasks)
+
+
+}
 
 fetch(SERVER_URL)
     .then(function (response) {
@@ -157,3 +166,5 @@ fetch(SERVER_URL)
         tasks = data.results;
         renderTask(tasks);
     });
+
+getLocalData(tasksLS)
